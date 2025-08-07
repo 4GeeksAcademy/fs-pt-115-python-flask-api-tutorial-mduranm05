@@ -20,6 +20,9 @@ def add_new_todo():
 @app.route('/todos/<int:position>', methods=['DELETE'])
 def delete_todo(position):
     print("This is the position to delete:", position)
+    if position < 0 or position >= len(todos):
+        return jsonify({"error": "Invalid position"}), 400
+    del todos[position]
     return jsonify(todos)
 
 
